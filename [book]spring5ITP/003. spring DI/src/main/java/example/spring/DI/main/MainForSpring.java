@@ -7,6 +7,7 @@ import example.spring.DI.exception.MemberNotFoundException;
 import example.spring.DI.exception.WrongIdPasswordException;
 import example.spring.DI.service.ChangePasswordService;
 import example.spring.DI.service.MemberRegisterService;
+import example.spring.DI.util.MemberInfoPrinter;
 import example.spring.DI.util.MemberListPrinter;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -28,6 +29,7 @@ public class MainForSpring {
         while (true) {
             System.out.println("명령어를 입력하세요.");
             String command = reader.readLine();
+
             if (command.equalsIgnoreCase("exit")) {
                 System.out.println("종료합니다.");
                 break;
@@ -41,7 +43,11 @@ public class MainForSpring {
             } else if (command.equals("list")) {
                 processListCommand();
                 continue;
+            } else if (command.startsWith("info ")) {
+                processInfoCommand(command.split(" "));
+                continue;
             }
+
             printHelp();
         }
     }
@@ -103,6 +109,16 @@ public class MainForSpring {
     private static void processListCommand() {
         MemberListPrinter listPrinter = context.getBean("listPrinter", MemberListPrinter.class);
         listPrinter.printAll();
+    }
+
+    private static void processInfoCommand(String[] arg) {
+        if(arg.length != 2) {
+            printHelp();
+            return;
+        }
+
+        MemberInfoPrinter infoPrinter = context.getBean("infoPrinter", MemberInfoPrinter.class);
+        infoPrinter.printMemberInfo(arg[1]);
     }
 
 }
