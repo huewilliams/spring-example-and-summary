@@ -7,6 +7,7 @@ import example.spring.DI.exception.MemberNotFoundException;
 import example.spring.DI.exception.WrongIdPasswordException;
 import example.spring.DI.service.ChangePasswordService;
 import example.spring.DI.service.MemberRegisterService;
+import example.spring.DI.util.MemberListPrinter;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
@@ -36,6 +37,9 @@ public class MainForSpring {
                 continue;
             } else if (command.startsWith("change ")) {
                 processChangeCommand(command.split(" "));
+                continue;
+            } else if (command.equals("list")) {
+                processListCommand();
                 continue;
             }
             printHelp();
@@ -94,6 +98,11 @@ public class MainForSpring {
         System.out.println("new 이메일 이름 암호 암호확인");
         System.out.println("change 이메일 현재암호 변경암호");
         System.out.println();
+    }
+
+    private static void processListCommand() {
+        MemberListPrinter listPrinter = context.getBean("listPrinter", MemberListPrinter.class);
+        listPrinter.printAll();
     }
 
 }
