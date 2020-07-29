@@ -23,7 +23,7 @@ public class MemberRegisterService {
         Member newMember = new Member(request.getEmail(), request.getPassword(), request.getName(),
                 LocalDateTime.now());
         memberDao.insert(newMember);
-        
+
         return newMember.getId();
     }
 
