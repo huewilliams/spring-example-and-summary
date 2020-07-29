@@ -9,6 +9,7 @@ import example.spring.DI.service.ChangePasswordService;
 import example.spring.DI.service.MemberRegisterService;
 import example.spring.DI.util.MemberInfoPrinter;
 import example.spring.DI.util.MemberListPrinter;
+import example.spring.DI.util.VersionPrinter;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
@@ -45,6 +46,9 @@ public class MainForSpring {
                 continue;
             } else if (command.startsWith("info ")) {
                 processInfoCommand(command.split(" "));
+                continue;
+            } else if (command.equals("version")) {
+                processVersionCommand();
                 continue;
             }
 
@@ -119,6 +123,11 @@ public class MainForSpring {
 
         MemberInfoPrinter infoPrinter = context.getBean("infoPrinter", MemberInfoPrinter.class);
         infoPrinter.printMemberInfo(arg[1]);
+    }
+
+    private static void processVersionCommand() {
+        VersionPrinter versionPrinter = context.getBean("versionPrinter", VersionPrinter.class);
+        versionPrinter.print();
     }
 
 }

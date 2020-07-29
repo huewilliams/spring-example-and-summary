@@ -6,6 +6,7 @@ import example.spring.DI.service.MemberRegisterService;
 import example.spring.DI.util.MemberInfoPrinter;
 import example.spring.DI.util.MemberListPrinter;
 import example.spring.DI.util.MemberPrinter;
+import example.spring.DI.util.VersionPrinter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -45,5 +46,13 @@ public class AppCtx {
         infoPrinter.setMemberDao(memberDao());
         infoPrinter.setMemberPrinter(memberPrinter());
         return infoPrinter;
+    }
+
+    @Bean
+    public VersionPrinter versionPrinter() {
+        VersionPrinter versionPrinter = new VersionPrinter();
+        versionPrinter.setMajorVersion(5);
+        versionPrinter.setMinorVersion(0);
+        return versionPrinter;
     }
 }
