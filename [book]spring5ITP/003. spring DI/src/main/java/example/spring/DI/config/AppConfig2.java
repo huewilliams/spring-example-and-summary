@@ -7,44 +7,39 @@ import example.spring.DI.util.MemberInfoPrinter;
 import example.spring.DI.util.MemberListPrinter;
 import example.spring.DI.util.MemberPrinter;
 import example.spring.DI.util.VersionPrinter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class AppCtx {
-
-    @Bean
-    public MemberDao memberDao() {
-        return new MemberDao();
-    }
+public class AppConfig2 {
+    // @Autowired : 스프링 빈 자동 주입 기능 (해당 타입의 빈을 찾아서 필드에 할당한다.)
+    @Autowired
+    private MemberDao memberDao;
+    @Autowired
+    private MemberPrinter memberPrinter;
 
     @Bean
     public MemberRegisterService registerService() {
-        return new MemberRegisterService(memberDao());
+        return new MemberRegisterService(memberDao);
     }
 
     @Bean
     public ChangePasswordService changePasswordService() {
         ChangePasswordService passwordService = new ChangePasswordService();
-        passwordService.setMemberDao(memberDao());
+        passwordService.setMemberDao(memberDao);
         return passwordService;
     }
-
-    @Bean
-    public MemberPrinter memberPrinter() {
-        return new MemberPrinter();
-    }
-
     @Bean
     public MemberListPrinter listPrinter() {
-        return new MemberListPrinter(memberDao(), memberPrinter());
+        return new MemberListPrinter(memberDao, memberPrinter);
     }
 
     @Bean
     public MemberInfoPrinter infoPrinter() {
         MemberInfoPrinter infoPrinter = new MemberInfoPrinter();
-        infoPrinter.setMemberDao(memberDao());
-        infoPrinter.setMemberPrinter(memberPrinter());
+        infoPrinter.setMemberDao(memberDao);
+        infoPrinter.setMemberPrinter(memberPrinter);
         return infoPrinter;
     }
 

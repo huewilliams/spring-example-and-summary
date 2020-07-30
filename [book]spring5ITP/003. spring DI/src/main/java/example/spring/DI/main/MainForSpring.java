@@ -1,6 +1,7 @@
 package example.spring.DI.main;
 
-import example.spring.DI.config.AppCtx;
+import example.spring.DI.config.AppConfig1;
+import example.spring.DI.config.AppConfig2;
 import example.spring.DI.dto.RegisterRequest;
 import example.spring.DI.exception.DuplicateMemberException;
 import example.spring.DI.exception.MemberNotFoundException;
@@ -22,7 +23,8 @@ public class MainForSpring {
     private static ApplicationContext context = null;
 
     public static void main(String[] args) throws IOException {
-        context = new AnnotationConfigApplicationContext(AppCtx.class);
+        // 설정 클래스가 두 개 이상일 때는 파라미터로 설정 클래스를 추가로 전달하면 된다.
+        context = new AnnotationConfigApplicationContext(AppConfig1.class, AppConfig2.class);
 
         BufferedReader reader =
                 new BufferedReader(new InputStreamReader(System.in));
