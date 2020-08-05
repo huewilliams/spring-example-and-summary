@@ -42,8 +42,6 @@ public class AppContext {
     @Bean
     public MemberInfoPrinter infoPrinter() {
         MemberInfoPrinter infoPrinter = new MemberInfoPrinter();
-        infoPrinter.setMemberDao(memberDao());
-        infoPrinter.setMemberPrinter(memberPrinter());
         return infoPrinter;
     }
 

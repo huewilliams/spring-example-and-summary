@@ -2,6 +2,7 @@ package util;
 
 import dao.MemberDao;
 import domain.Member;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class MemberInfoPrinter {
 
@@ -18,10 +19,12 @@ public class MemberInfoPrinter {
         System.out.println();
     }
 
+    @Autowired
     public void setMemberDao(MemberDao memberDao) {
         this.memberDao = memberDao;
     }
 
+    @Autowired
     public void setMemberPrinter(MemberPrinter memberPrinter) {
         this.memberPrinter = memberPrinter;
     }
