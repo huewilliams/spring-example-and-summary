@@ -4,11 +4,17 @@ import dao.MemberDao;
 import domain.Member;
 import dto.RegisterRequest;
 import exception.DuplicateMemberException;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDateTime;
 
 public class MemberRegisterService {
+    @Autowired
     private MemberDao memberDao;
+
+    public MemberRegisterService() {
+
+    }
 
     // 생성자를 통해 의존 객체를 주입 받음
     public MemberRegisterService(MemberDao memberDao) {

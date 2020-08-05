@@ -25,7 +25,7 @@ public class AppContext {
 
     @Bean
     public MemberRegisterService memberRegisterService() {
-        return new MemberRegisterService(memberDao());
+        return new MemberRegisterService();
     }
 
     // 의존을 주입하지 않아도 스프링이 @Autowired가 붙은 필드에 해당 타입의 Bean 객체를 찾아서 주입한다.
@@ -36,13 +36,12 @@ public class AppContext {
 
     @Bean
     public MemberListPrinter listPrinter() {
-        return new MemberListPrinter(memberDao(), memberPrinter());
+        return new MemberListPrinter();
     }
 
     @Bean
     public MemberInfoPrinter infoPrinter() {
-        MemberInfoPrinter infoPrinter = new MemberInfoPrinter();
-        return infoPrinter;
+        return new MemberInfoPrinter();
     }
 
     @Bean
