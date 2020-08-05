@@ -1,6 +1,7 @@
 package config;
 
 import dao.MemberDao;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import service.ChangePasswordService;
@@ -18,8 +19,20 @@ public class AppContext {
         return new MemberDao();
     }
 
+//    @Bean
+//    public MemberPrinter memberPrinter() {
+//        return new MemberPrinter();
+//    }
+
     @Bean
-    public MemberPrinter memberPrinter() {
+    // 한정자를 printer로 지정한다. 이렇게 지정한 한정자는 @Autowired에서 자동 주입할 빈을 한정할 때 사용된다.
+    @Qualifier("printer")
+    public MemberPrinter memberPrinter1() {
+        return new MemberPrinter();
+    }
+
+    @Bean
+    public MemberPrinter memberPrinter2() {
         return new MemberPrinter();
     }
 
