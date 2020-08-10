@@ -6,10 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import service.ChangePasswordService;
 import service.MemberRegisterService;
-import util.MemberInfoPrinter;
-import util.MemberListPrinter;
-import util.MemberPrinter;
-import util.VersionPrinter;
+import util.*;
 
 @Configuration
 public class AppContext {
@@ -26,6 +23,7 @@ public class AppContext {
 
     @Bean
     // 한정자를 printer로 지정한다. 이렇게 지정한 한정자는 @Autowired에서 자동 주입할 빈을 한정할 때 사용된다.
+    // @Qualifier로 한정자를 지정하지 않으면 빈 이름이 한정자가 된다.
     @Qualifier("printer")
     public MemberPrinter memberPrinter1() {
         return new MemberPrinter();
@@ -33,7 +31,7 @@ public class AppContext {
 
     @Bean
     public MemberPrinter memberPrinter2() {
-        return new MemberPrinter();
+        return new MemberSummaryPrinter();
     }
 
     @Bean
